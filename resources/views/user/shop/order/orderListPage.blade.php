@@ -1,108 +1,168 @@
-
 @extends('user.layouts.master')
 
 @section('content')
 
- @foreach ($order as $item)
+    <div class="min-h-screen bg-gray-100 py-12 px-4">
+        <div class="max-w-3xl mx-auto space-y-12">
 
-<div class="min-h-screen bg-gray-100 py-12 px-4">
-    <div class="max-w-3xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden" id="productTable-1">
-
-
-            {{-- Header: Status Section --}}
-            <div class="bg-indigo-600 p-8 text-center">
-                <div  class="inline-flex items-center justify-center bg-white w-16 h-16 rounded-full mb-4">
-                    @if ($item[0]['status'] == 0)
-                     <i class="fa-regular fa-clock text-3xl "></i>
-                    @elseif ($item[0]['status'] == 1)
-                    <i class="fa-solid fa-check  text-3xl"></i>
-                    @else
-                    <i class="fa-regular fa-circle-xmark text-3xl "></i>
-                     @endif
-                </div>
-
-               <div class="block">
-                 @if ($item[0]['status'] == 0)
-                    <h1 class="text-3xl font-bold text-amber-300">Pending...</h1>
-                @elseif ($item[0]['status'] == 1)
-                    <h1 class="text-3xl font-bold text-white">Accepted</h1>
-                @else
-                    <h1 class="text-3xl font-bold text-red-700">Rejected...</h1>
+            {{-- PENDING SECTION  --}}
+            @php $hasPending = false; @endphp
+            @foreach ($order as $item)
+                @if ($item[0]['status'] == 0)
+                    @php $hasPending = true; @endphp
                 @endif
-               </div>
-                <p class="mt-2 opacity-90">Thank you for your purchase. We've received your order.</p>
-            </div>
+            @endforeach
 
-            <div class="p-8">
-                {{-- Order Meta: Number & Date --}}
-                <div class="flex flex-col md:flex-row justify-between mb-8 pb-6 border-b border-gray-100 gap-4">
-                    <div>
-                        <p class="text-sm text-gray-500 uppercase font-semibold">Order Number</p>
-                        <p class="text-lg font-bold text-gray-800">{{ $item[0]['order_code'] }}</p>
-                    </div>
-                    <div class="md:text-right">
-                        <p class="text-sm text-gray-500 uppercase font-semibold">Date</p>
-                        <p class="text-lg font-bold text-gray-800">{{ $item[0]['created_at']->format('j F Y') }}</p>
-                    </div>
+            @if ($hasPending)
+                <div class="border-l-8 border-amber-400 pl-4">
+                    <h2 class="text-2xl font-black text-gray-800 uppercase tracking-wider">Ongoing Orders (Pending)</h2>
+                    <p class="text-gray-500 text-sm">Your orders are still being processed.</p>
                 </div>
 
-                {{-- Product List Section (ဒီနေရာမှာ တစ်ခုချင်းစီ အောက်ဆင်းအောင် ပြင်ထားပါတယ်) --}}
-                <div class="space-y-6 mb-8">
-                    @foreach ($item as $product)
-                    <div class="flex items-center justify-between border-b border-gray-50 pb-4">
-                        <div class="flex items-center ">
-                            <div class="w-20 h-20 bg-gray-50 rounded-lg flex-shrink-0 flex items-center justify-center p-2">
-                                <img src="{{ asset('product/'.$product['product_image']) }}" alt="Product" class="object-contain max-h-full">
-                            </div>
-                            <div class="ml-4">
-                                <p class="font-bold text-lg text-gray-800">{{ $product['product_name'] }}</p>
-                                <p class="text-gray-500">Qty: {{ $product['count'] }}</p>
-
+                @foreach ($order as $item)
+                    @if ($item[0]['status'] == 0)
+                        <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-200">
+                            <div class="bg-indigo-600 p-8 text-center">
+                                <div class="inline-flex items-center justify-center bg-white w-16 h-16 rounded-full mb-4">
+                                    <i class="fa-regular fa-clock text-3xl text-indigo-600"></i>
+                                </div>
+                                <h1 class="text-3xl font-bold text-amber-300">Pending...</h1>
+                                <p class="mt-2 text-white opacity-90 font-light">We've received your order.</p>
                             </div>
 
-                            {{-- <div class="ml-6">
-                                <p class="font-bold text-sm text-gray-800">Capcity : {{ $cart[0]['capacity'] }}</p>
+                            <div class="p-8">
+                                <div class="flex justify-between mb-8 pb-6 border-b border-gray-100">
+                                    <div>
+                                        <p class="text-sm text-gray-400 uppercase">Order Number</p>
+                                        <p class="text-lg font-bold">{{ $item[0]['order_code'] }}</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-sm text-gray-400 uppercase">Date</p>
+                                        <p class="text-lg font-bold">{{ $item[0]['created_at']->format('j F Y') }}</p>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-6 mb-8">
+                                    @foreach ($item as $product)
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center">
+                                                <img src="{{ asset('product/' . $product['product_image']) }}"
+                                                    class="w-16 h-16 object-contain bg-gray-50 rounded-lg p-1">
+                                                <div class="ml-4">
+                                                    <p class="font-bold text-gray-800">{{ $product['product_name'] }}</p>
+                                                    <p class="text-sm text-gray-500">Qty: {{ $product['count'] }}</p>
+                                                </div>
+                                            </div>
+                                            <p class="font-bold text-gray-800">
+                                                {{ number_format($item[0]['product_price'] * $product['count']) }} MMK</p>
+                                        </div>
+                                    @endforeach
+                                </div>
+
+                                <div class="bg-gray-50 rounded-2xl p-6 flex justify-between items-center">
+                                    <span class="font-bold text-gray-600">Grand Total</span>
+                                    <span
+                                        class="text-2xl font-black text-indigo-600">{{ number_format($item[0]['total_amount']) }}
+                                        MMK</span>
+                                </div>
                             </div>
-
-                             <div class="ml-4">
-                                <p class="font-bold text-sm text-gray-800">Color : {{ $cart[0]['color'] }}</p>
-                            </div> --}}
-
                         </div>
-                        <div class="text-right font-bold text-gray-800 text-lg">
-                            {{ number_format($item[0]['product_price'] * $product['count']) }} MMK
+                    @endif
+                @endforeach
+            @endif
+
+
+            {{--  HISTORY SECTION --}}
+            @php $hasHistory = false; @endphp
+            @foreach ($order as $item)
+                @if ($item[0]['status'] != 0)
+                    @php $hasHistory = true; @endphp
+                @endif
+            @endforeach
+
+            @if ($hasHistory)
+                <div class="border-l-8 border-indigo-500 pl-4 mt-16">
+                    <h2 class="text-2xl font-black text-gray-800 uppercase tracking-wider">Order History</h2>
+                    <p class="text-gray-500 text-sm">You can check your order history here.</p>
+                </div>
+
+                @foreach ($order as $item)
+                    @if ($item[0]['status'] != 0)
+                        <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-200">
+
+                            <div class="{{ $item[0]['status'] == 1 ? 'bg-green-600' : 'bg-red-600' }} p-8 text-center">
+                                <div class="inline-flex items-center justify-center bg-white w-16 h-16 rounded-full mb-4">
+                                    @if ($item[0]['status'] == 1)
+                                        <i class="fa-solid fa-check text-3xl text-green-600"></i>
+                                    @else
+                                        <i class="fa-solid fa-xmark text-3xl text-red-600"></i>
+                                    @endif
+                                </div>
+                                <h1 class="text-3xl font-bold text-white">
+                                    {{ $item[0]['status'] == 1 ? 'Accepted' : 'Rejected' }}
+                                </h1>
+                                <p class="mt-2 text-white opacity-90 font-light">
+                                    {{ $item[0]['status'] == 1 ? 'Your order has been confirmed.' : 'This order has been cancelled.' }}
+                                </p>
+                            </div>
+
+                            <div class="p-8">
+                                {{-- Order Meta --}}
+                                <div class="flex justify-between mb-8 pb-6 border-b border-gray-100">
+                                    <div>
+                                        <p class="text-sm text-gray-400 uppercase">Order Number</p>
+                                        <p class="text-lg font-bold">{{ $item[0]['order_code'] }}</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-sm text-gray-400 uppercase">Date</p>
+                                        <p class="text-lg font-bold">{{ $item[0]['created_at']->format('j F Y') }}</p>
+                                    </div>
+                                </div>
+
+                                {{-- Product List (Invoice Style) --}}
+                                <div class="space-y-6 mb-8">
+                                    @foreach ($item as $product)
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center">
+                                                <img src="{{ asset('product/' . $product['product_image']) }}"
+                                                    class="w-16 h-16 object-contain bg-gray-50 rounded-lg p-1">
+                                                <div class="ml-4">
+                                                    <p class="font-bold text-gray-800">{{ $product['product_name'] }}</p>
+                                                    <p class="text-sm text-gray-500">Qty: {{ $product['count'] }}</p>
+                                                </div>
+                                            </div>
+                                            <p class="font-bold text-gray-800">
+                                                {{ number_format($item[0]['product_price'] * $product['count']) }} MMK</p>
+                                        </div>
+                                    @endforeach
+                                </div>
+
+                                {{-- Grand Total --}}
+                                <div class="bg-gray-50 rounded-2xl p-6 flex justify-between items-center">
+                                    <span class="font-bold text-gray-600">Grand Total</span>
+                                    <span
+                                        class="text-2xl font-black {{ $item[0]['status'] == 1 ? 'text-green-600' : 'text-red-600' }}">
+                                        {{ number_format($item[0]['total_amount']) }} MMK
+                                    </span>
+                                </div>
+
+                                <div class="mt-8 flex gap-3 print:hidden">
+                                    <button onclick="window.print()"
+                                        class="flex-1 bg-gray-800 text-white font-bold py-3 rounded-xl hover:bg-black transition">
+                                        Print Invoice
+                                    </button>
+                                    <a href="{{ route('userShop') }}"
+                                        class="flex-1 text-center border border-gray-300 text-gray-600 font-bold py-3 rounded-xl hover:bg-gray-50">
+                                        Shop Again
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    @endforeach
-                </div>
+                    @endif
+                @endforeach
+            @endif
 
-                {{-- Totals --}}
-                <div class="bg-gray-50 rounded-2xl p-6">
-                    <div class="flex justify-between items-center text-xl font-black text-gray-900">
-                        <span>Grand Total</span>
-                        <span class="text-indigo-600 text-2xl" id="finalTotal-1">
-                            {{ number_format($item[0]['total_amount']) }} MMK
-                        </span>
-                    </div>
-                </div>
-
-                {{-- Buttons (Print မှာ မပေါ်အောင် print:hidden ထည့်ထားပါတယ်) --}}
-                <div class="mt-10 flex flex-col gap-3 print:hidden">
-                    <button onclick="window.print()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-xl transition-all shadow-lg">
-                        Print Invoice
-                    </button>
-                    <a href="{{route('userShop')}}" class="w-full text-center text-gray-500 hover:text-gray-800 font-medium py-2">
-                        Back to Shopping
-                    </a>
-                </div>
-            </div>
-
-
+        </div>
     </div>
-</div>
-
-  @endforeach
-
-{{-- Footer ကို wrapper အပြင်ထုတ်ထားတာ သေချာပါစေ --}}
 
 @endsection

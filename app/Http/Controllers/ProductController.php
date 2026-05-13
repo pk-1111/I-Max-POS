@@ -51,7 +51,7 @@ class ProductController extends Controller
 
 
 
-                  return to_route('productList');
+                  return back();
        }
 
 
@@ -87,16 +87,19 @@ class ProductController extends Controller
 
       //detail product
 
-    public function productDetails($id){
+    public function adminProductDetails($id) {
 
-    $productDetails = Product::select('products.id','products.name','products.price','products.description','products.image','products.stock as available_item','categories.title as category_name')
+    $productDetail = Product::select('products.id','products.name','products.price','products.description','products.image','products.stock as available_item','categories.title as category_name')
         ->leftJoin('categories','products.category_id','categories.category_id')
-        ->where('id',$id)
+        ->where('products.id',$id)
         ->first();
 
-        return view('admin.product.productDetails',compact('productDetails'));
-    }
+       
+    
 
+        return view('admin.product.productDetails',compact('productDetail'));
+    }
+     
 
 
 
@@ -134,12 +137,12 @@ class ProductController extends Controller
 
 
 
-        Alert::success('Product Create', 'Product Created Successfully...');
+        Alert::success('Product Update', 'Product Updated Successfully...');
 
 
 
 
-                  return to_route('productList');
+                  return back();
 
 
     }
@@ -189,7 +192,7 @@ class ProductController extends Controller
             'price'  => 'required|numeric|min:1',
             'stock'  => 'required|numeric|max:999',
             'description'  => 'required|max:2000',
-            'discount' => 'nullable|numeric|min:0|max:100'
+            'rate' => 'nullable|numeric|min:0|max:100'
         ];
 
         $rules['image'] = $action == 'create'  ?   'required|mimes:png,jpg,jpeg,webp,svg|file'  :  'mimes:png,jpg,jpeg,webp,svg|file';

@@ -1,20 +1,20 @@
 $(document).ready(function () {
-    $('.statusChange').change(function(){
+    $('.statusChange').change(function () {
         $changeStatus = $(this).val();
 
         $orderCode = $(this).parents('tr').find('.orderCode').val();
 
         $data = {
-            'order_code' : $orderCode ,
-            'status' : $changeStatus
+            'order_code': $orderCode,
+            'status': $changeStatus
         };
 
         $.ajax({
-            type : 'get' ,
-            url : '/admin/order/changeStatus' ,
-            data : $data ,
-            dataType : 'json' ,
-            success : function(res){
+            type: 'get',
+            url: '/order/changeStatus',
+            data: $data,
+            dataType: 'json',
+            success: function (res) {
                 res.status == 'success' ? location.reload() : ''
             }
         })
@@ -23,56 +23,56 @@ $(document).ready(function () {
 
     // order-confirm
 
-    $('#btn-order-confirm').click(function(){
+    $('#btn-order-confirm').click(function () {
         $orderList = [];
         $orderCode = $('#orderCode').text();
 
-        $('#productTable tbody tr').each(function(index,row){
+        $('#productTable tbody tr').each(function (index, row) {
             $productId = $(row).find(".productId").val();
             $productOrderCount = $(row).find(".productOrderCount").val();
 
 
             $orderList.push({
 
-                'product_id' : $productId,
-                'order_count' : $productOrderCount,
-                'order_code' : $orderCode,
+                'product_id': $productId,
+                'order_count': $productOrderCount,
+                'order_code': $orderCode,
 
             })
         })
 
-         $.ajax({
-            type : 'get' ,
-            url : '/admin/order/confirmOrder' ,
-            data : Object.assign({},$orderList),
-            dataType : 'json' ,
-            success : function(res){
-               if(res.status == 'success') {
-                location.href = '/user/payment'
-               }
+        $.ajax({
+            type: 'get',
+            url: '/order/confirmOrder',
+            data: Object.assign({}, $orderList),
+            dataType: 'json',
+            success: function (res) {
+                if (res.status == 'success') {
+                    location.href = '/user/payment'
+                }
             }
         })
     }) // end
 
 
-     // order-reject
+    // order-reject
 
-    $('#btn-order-cancle').click(function(){
+    $('#btn-order-cancle').click(function () {
 
 
         $data = {
-            'orderCode' : $('#orderCode').text()
+            'orderCode': $('#orderCode').text()
         }
 
-         $.ajax({
-            type : 'get' ,
-            url : '/admin/order/cancleOrder' ,
-            data : $data,
-            dataType : 'json' ,
-            success : function(res){
-               if(res.status == 'success') {
-                location.href = '/user/payment'
-               }
+        $.ajax({
+            type: 'get',
+            url: '/order/cancleOrder',
+            data: $data,
+            dataType: 'json',
+            success: function (res) {
+                if (res.status == 'success') {
+                    location.href = '/user/payment'
+                }
             }
         })
     })

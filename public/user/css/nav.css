@@ -1,7 +1,7 @@
-.iMax_navbar{
+.iMax_navbar {
     display: flex;
     flex-direction: column;
-    align-items:flex-start;
+    align-items: flex-start;
     padding: 10px 40px;
     background-color: #ffff;
     border-bottom: 1px solid #f2f2f2;
@@ -10,7 +10,7 @@
 }
 
 
-.nav_left{
+.nav_left {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -19,22 +19,21 @@
 
 }
 
-.logo_section{
+.logo_section {
     display: flex;
     align-items: center;
 }
 
-.logo_main{
-    margin:0 10px;
-    color:#301f1f;
+.logo_main {
+    margin: 0 10px;
+    color: #301f1f;
     font-size: 50px;
     font-weight: bold;
 
     /*silver effect*/
-    background: linear-gradient(
-        to right, #bfbfbf 0%,#ffffff 60%,#bfbfbf 100%
-        /* to right,#777 35%,#fff 45%,#fff 35%,#777 65% */
-    );
+    background: linear-gradient(to right, #bfbfbf 0%, #ffffff 60%, #bfbfbf 100%
+            /* to right,#777 35%,#fff 45%,#fff 35%,#777 65% */
+        );
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -42,18 +41,17 @@
     animation: shine 6s linear infinite;
 }
 
-.promax{
+.promax {
 
-     margin:0 10px;
-    color:#301f1f;
+    margin: 0 10px;
+    color: #301f1f;
     font-size: 50px;
     font-weight: bold;
 
     /*silver effect*/
-    background: linear-gradient(
-        to right, #bfbfbf 35%,#ec9107 60%,#bfbfbf 100%
-        /* to right,#777 35%,#fff 45%,#fff 35%,#777 65% */
-    );
+    background: linear-gradient(to right, #bfbfbf 35%, #ec9107 60%, #bfbfbf 100%
+            /* to right,#777 35%,#fff 45%,#fff 35%,#777 65% */
+        );
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -62,15 +60,15 @@
 
 }
 
-@keyframes shine{
-    to{
+@keyframes shine {
+    to {
         background-position: 200% center;
     }
 }
 
-.logo_sub{
+.logo_sub {
     display: flex;
-    align-items:center;
+    align-items: center;
     font-size: 11px;
     color: #666;
     line-height: 1;
@@ -78,19 +76,19 @@
 
 }
 
-.logo_divider{
+.logo_divider {
 
-  width: 1px;
-  height: 50px;
-  background-color: #180f0f;
-  margin: 0 15px;
-  display: inline-block;
+    width: 1px;
+    height: 50px;
+    background-color: #180f0f;
+    margin: 0 15px;
+    display: inline-block;
 
 }
 
 
 
-.apple_icon{
+.apple_icon {
     width: 25px;
     margin-right: 4px;
     margin-left: 10px;
@@ -98,15 +96,15 @@
     background-color: rgb(203, 217, 229);
 }
 
-.author_name{
+.author_name {
     font-weight: bold;
 }
 
-.nav_icons{
+.nav_icons {
     display: flex;
-    gap:20px;
-    align-items:center;
-    justify-content: flex-end ;
+    gap: 20px;
+    align-items: center;
+    justify-content: flex-end;
 
 
 }
@@ -115,22 +113,20 @@
 
 /* Menu Section*/
 
-.nav_center{
+.nav_center {
     display: flex;
-    gap:25px;
-      margin:0 10px;
+    gap: 25px;
+    margin: 0 10px;
 }
 
-.menu_item{
+.menu_item {
     font-size: 18px;
-    color:#555;
+    color: #555;
     cursor: pointer;
     white-space: nowrap;
-    transition:color 0.2s;
+    transition: color 0.2s;
 }
 
-.menu_item:hover{
+.menu_item:hover {
     color: #000;
 }
-
-

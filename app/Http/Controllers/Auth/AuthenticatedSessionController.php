@@ -17,7 +17,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        return view('authentication.login');
+      return view('authentication.login');
     }
 
     /**
@@ -27,9 +27,11 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
+        // dd($request->user()->role);
+
         $request->session()->regenerate();
 
-      if($request->user()->role == 'admin' || $request->user()->role == 'superadmin'){
+      if($request->user()->role == 'superadmin' || $request->user()->role == 'admin'){
         return to_route('adminHome');
       }
 

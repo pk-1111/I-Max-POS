@@ -9,7 +9,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
-  Route::group(['prefix'  => 'admin' ,  'middleware' => 'admin' ] ,function(){
+  Route::group(['prefix'  => 'admin' ,  'middleware' => ['auth','admin'] ] ,function(){
      Route::get('home',[AdminController::class,'adminHome'])->name('adminHome');
 
 
@@ -53,6 +53,12 @@ use Illuminate\Support\Facades\Route;
 
          });
 
+          // user list
+
+         Route::get('userListPage',[ProfileController::class,'userListPage'])->name('userListPage');
+
+         });
+
 
          // Product
 
@@ -65,7 +71,7 @@ use Illuminate\Support\Facades\Route;
 
 
           //detail product
-         Route::get('productDetails/{id}',[ProductController::class,'productDetails'])->name('productDetails');
+         Route::get('product/details/{id}',[ProductController::class,'adminProductDetails'])->name('adminProductDetails');
 
          // update product
 
@@ -114,7 +120,7 @@ use Illuminate\Support\Facades\Route;
 
     });
 
-  });
+
 
 
 

@@ -45,7 +45,7 @@
 
 <body>
 
-    <nav class="iMax_navbar">
+    <nav class="iMax_navbar top-0 sticky z-50">
         <div class="nav_left">
 
             <div class="logo_section">
@@ -58,15 +58,19 @@
             </div>
 
             <div class="nav_icons">
-                <div class="icon_item"><a href="{{route('orderPage')}}"><i class="fa-solid fa-clipboard-list"></i></a></div>
-                <div class="icon_item"><a href="{{route('cartShow')}}"><i class="fa-solid fa-bag-shopping"></a></i></div>
-                <div class="icon_item"><a href=""><i class="fa-solid fa-user"></i></a></div>
-               <form action="{{route('logout')}}" method="post">
-                     @csrf
-                     <button type="submit"
-                    class=" text-gray-800 rounded p-2   hover:bg-gray-800 hover:text-white transition-colors duration-300">Logout</button>
+                <div class="icon_item"><a href="{{ route('orderPage') }}"><i class="fa-solid fa-clipboard-list"></i></a>
+                </div>
+                <div class="icon_item"><a href="{{ route('cartShow') }}"><i class="fa-solid fa-bag-shopping"></a></i>
+                </div>
+                <div class="icon_item">
+                    <h3 class="text-xl font-extralight">{{ Auth::user()->name }}</h3></a>
+                </div>
+                <form action="{{ route('logout') }}" method="post">
+                    @csrf
+                    <button type="submit"
+                        class=" text-gray-800 rounded p-2   hover:bg-gray-800 hover:text-white transition-colors duration-300">Logout</button>
 
-               </form>
+                </form>
             </div>
 
         </div>
@@ -77,27 +81,24 @@
 
         <div class="nav_center">
             <div class="menu_item dropdown"><a href="{{ route('userShop') }}">Shop</a>
-                 <span><i
-                        class="fa-solid fa-angle-down"></i></span>
-                         <div class="dropdown_content">
-                            <a href="{{route('iphoneShop')}}">iPhone</a>
-                            <a href="{{route('ipadShop')}}">iPad</a>
-                            <a href="{{route('macbookShop')}}">MacBook</a>
-                            <a href="{{route('iWatchShop')}}">AppleWatch</a>
-                            <a href="{{route('airpodsShop')}}">Accessories</a>
-                         </div>
-                    </div>
-            <div class="menu_item dropdown"><a href="{{ route('learnMorePage') }}">Learn More</a> <span><i
-                        class="fa-solid fa-angle-down"></i></span>
-                            <div class="dropdown_content">
-                            <a href="{{route('iphone17Pro')}}">iPhone 17 pro</a>
-                            <a href="{{route('iphone17')}}">iPhone 17</a>
-                            <a href="{{route('macBookPro')}}">MacBook Pro</a>
-                            <a href="#">MacBook Air</a>
-                            <a href="#">iPad Air</a>
-                         </div>
-                    </div>
-            <div class="menu_item dropdown"><a href="{{ route('businessPage') }}">Business</a> <span></span></div>
+                <span><i class="fa-solid fa-angle-down"></i></span>
+                <div class="dropdown_content">
+                    <a href="{{ route('iphoneShop') }}">iPhone</a>
+                    <a href="{{ route('ipadShop') }}">iPad</a>
+                    <a href="{{ route('macbookShop') }}">MacBook</a>
+                    <a href="{{ route('iWatchShop') }}">AppleWatch</a>
+                    <a href="{{ route('airpodsShop') }}">AirPods</a>
+                    <a href="{{ route('accessoriesShop') }}">Accessories</a>
+                </div>
+            </div>
+            <div class="menu_item dropdown">Learn More</a> <span><i class="fa-solid fa-angle-down"></i></span>
+                <div class="dropdown_content">
+                    <a href="{{ route('iphone17Pro') }}">iPhone 17 pro</a>
+                    <a href="{{ route('iphone17') }}">iPhone 17</a>
+                    <a href="{{ route('macBookPro') }}">MacBook Pro</a>
+                </div>
+            </div>
+
             <div class="menu_item"><a href="{{ route('locationPage') }}">Our Locations</a> <span></span></div>
             <div class="menu_item"><a href="{{ route('aboutUsPage') }}">About Us</a> <span></span>
             </div>
@@ -113,6 +114,8 @@
 
 
     @yield('content')
+
+    @include('sweetalert::alert')
 
     <!-- Footer Start -->
     <div class="footer_wrapper">
@@ -190,20 +193,22 @@
 
     {{-- storage js --}}
 
-    <script src="{{asset('user/js/storage.js')}}"></script>
+    <script src="{{ asset('user/js/storage.js') }}"></script>
 
-     {{-- changeQty js --}}
+    {{-- changeQty js --}}
 
-    <script src="{{asset('user/js/changeQty.js')}}"></script>
+    <script src="{{ asset('user/js/changeQty.js') }}"></script>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
 
     {{-- totalQty js --}}
 
-    <script src="{{asset('user/js/totalQty.js')}}"></script>
+    <script src="{{ asset('user/js/totalQty.js') }}"></script>
 
 
 

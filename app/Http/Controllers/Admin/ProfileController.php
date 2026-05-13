@@ -90,7 +90,7 @@ class ProfileController extends Controller
 
                  return to_route('adminHome');
         }else{
-              Alert::success('Error Message', 'Old Password Do Not Match ! Try Again');
+              Alert::success('Change Password ', 'Change Password Success');
 
 
                  return back();
@@ -144,7 +144,7 @@ class ProfileController extends Controller
         
        //searchKey
 
-          $admin = User::select('id','name','email','phone','address','created_at','role','provider')
+         $admin = User::select('id','name','email','phone','address','created_at','role','provider')
            ->whereIn('role',['admin','superadmin'])
            ->when(request('searchKey'),function($query){
             $query->whereAny(['name','email','phone','address','provider','role'] , 'like', '%'.request('searchKey').'%');
@@ -154,6 +154,26 @@ class ProfileController extends Controller
             ->paginate(6);
         
         return view ('admin.profile.adminList',compact('admin'));
+    }
+
+
+     // direct admin list
+
+
+      public function userListPage(Request $request){
+        
+       //searchKey
+
+          $user = User::select('id','name','email','phone','address','created_at','role','provider')
+           ->whereIn('role',['user'])
+           ->when(request('searchKey'),function($query){
+            $query->whereAny(['name','email','phone','address','provider','role'] , 'like', '%'.request('searchKey').'%');
+
+           })
+
+            ->paginate(6);
+        
+        return view ('admin.profile.userList',compact('user'));
     }
     
 
@@ -168,8 +188,12 @@ class ProfileController extends Controller
 
     $data = $this->requestAdminAccountData($request);
 
+    
 
-    User::create($data);
+
+   $user = User::create($data);
+
+    dd($user->toArray());
 
     Alert::success('Admin Account Create', 'Admin Account Created Successfully...');
 
@@ -179,21 +203,19 @@ class ProfileController extends Controller
 
     }
 
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
       //      Private Function Zone     //
+
+        private function requestAdminAccountData($request) {
+           
+         return [
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+             'role'  => 'admin'
+
+        ];
+         dd($request->password);
+    }
 
 
     //  request user profile data
@@ -204,6 +226,7 @@ class ProfileController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'address' => $request->address,
+            'password' => Hash::make($request->password),
         ];
     }
 

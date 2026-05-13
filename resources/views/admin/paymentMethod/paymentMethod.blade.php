@@ -1,123 +1,113 @@
-
-
 @extends('admin.layouts.master')
 
 @section('content')
     <!-- Begin Page Content -->
-    <div class="container-fluid">
+    <div class="container-fluid px-4">
 
         <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Category List</h1>
-
+        <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-3">
+            <h1 class="h3 mb-0 text-gray-800 font-weight-bold">Payment Methods</h1>
         </div>
 
-        <div class="">
-            <div class="row">
-                <div class="col-5 ">
-                    <div class="card">
-                        <div class="card-body shadow">
-                            <form action="{{route("paymentMethodCreate")}}" class="p-3 rounded" method="post">
-                                @csrf
-                                <label for="">Account No.</label>
-                                <input type="text"
-                                    class="form-control  @error('accountNumber')
-                                    is-invalid @enderror"
-                                    value="" name="accountNumber" placeholder="Account No. ...">
+        <div class="row">
+            <!-- Left Side: Create Payment Form -->
+            <div class="col-xl-4 col-lg-5">
+                <div class="card shadow border-0 mb-4">
+                    <div class="card-header bg-white py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Add New Account</h6>
+                    </div>
+                    <div class="card-body">
+                        <form action="{{ route('paymentMethodCreate') }}" method="post">
+                            @csrf
 
+                            <div class="form-group mb-3">
+                                <label class="small mb-1 text-dark font-weight-bold">Account Number</label>
+                                <input type="text"
+                                    class="form-control shadow-sm @error('accountNumber') is-invalid @enderror"
+                                    value="{{ old('accountNumber') }}" name="accountNumber"
+                                    placeholder="Enter  Account No...">
                                 @error('accountNumber')
-                                    <small class="invalid-feedback">{{ $message }}</small>
+                                    <small class="invalid-feedback font-weight-bold">{{ $message }}</small>
                                 @enderror
-                                  <label for=""  class="mt-3">Account Name.</label>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label class="small mb-1 text-dark font-weight-bold">Account Name</label>
                                 <input type="text"
-                                    class="form-control  @error('accountName')
-                                    is-invalid @enderror"
-                                    value="" name="accountName" placeholder="Account Name ...">
-
+                                    class="form-control shadow-sm @error('accountName') is-invalid @enderror"
+                                    value="{{ old('accountName') }}" name="accountName" placeholder="Enter Account Name...">
                                 @error('accountName')
-                                    <small class="invalid-feedback">{{ $message }}</small>
+                                    <small class="invalid-feedback font-weight-bold">{{ $message }}</small>
                                 @enderror
-                                  <label for="" class="mt-3">Type</label>
+                            </div>
 
-                                         <input type="text"
-                                    class="form-control  @error('accountType')
-                                    is-invalid @enderror"
-                                    value="" name="accountType" placeholder="Account Type ...">
+                            <div class="form-group mb-4">
+                                <label class="small mb-1 text-dark font-weight-bold">Account Type</label>
+                                <input type="text"
+                                    class="form-control shadow-sm @error('accountType') is-invalid @enderror"
+                                    value="{{ old('accountType') }}" name="accountType" placeholder="Enter AccountType...">
+                                @error('accountType')
+                                    <small class="invalid-feedback font-weight-bold">{{ $message }}</small>
+                                @enderror
+                            </div>
 
+                            <button type="submit" class="btn btn-primary btn-block shadow-sm">
+                                <i class="fas fa-plus-circle mr-1"></i> Create Payment
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
-                                            @error('accountType')
-                                                <small class="invalid-feedback">{{ $message }}</small>
-                                            @enderror
-
-                                <input type="submit" class="btn btn-outline-primary mt-3" value="Create Payment" id="">
-                            </form>
+            <!-- Right Side: Payment List Table -->
+            <div class="col-xl-8 col-lg-7">
+                <div class="card shadow border-0">
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0 text-center">
+                                <thead class="bg-light text-primary">
+                                    <tr>
+                                        <th class="border-0">ID</th>
+                                        <th class="border-0 text-left pl-4">Account Details</th>
+                                        <th class="border-0">Type</th>
+                                        <th class="border-0">Created Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (count($payments) > 0)
+                                        @foreach ($payments as $item)
+                                            <tr>
+                                                <td class="align-middle">{{ $item->id }}</td>
+                                                <td class="align-middle text-left pl-4">
+                                                    <div class="font-weight-bold text-dark">{{ $item->account_name }}</div>
+                                                    <div class="small text-muted">{{ $item->account_number }}</div>
+                                                </td>
+                                                <td class="align-middle">
+                                                    <span
+                                                        class="badge badge-info px-3 py-2 shadow-sm">{{ $item->type }}</span>
+                                                </td>
+                                                <td class="align-middle text-muted small">
+                                                    {{ $item->created_at->format('j M Y') }}
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            <td colspan="4" class="py-5 text-muted">
+                                                No payment methods found.
+                                            </td>
+                                        </tr>
+                                    @endif
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-                <div class="col-7">
-
-                    <table class="table table-hover  table-bordered border text-center shadow-sm">
-                        <thead class="bg-primary text-white">
-                            <tr>
-                                <th>ID</th>
-                                <th>Account No.</th>
-                                <th>Account Name</th>
-                                <th>Type</th>
-                                <th>Created at</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                        @foreach ($payments as $item )
-                                    <tr>
-                                        <td>{{$item['id']}}</td>
-                                        <td>{{ $item['account_number'] }}</td>
-                                        <td>{{ $item['account_name'] }}</td>
-                                        <td>{{$item['type']}}</td>
-                                        <td>{{ $item->created_at->format('j-F-Y') }}</td>
-
-
-
-                                            {{-- <a href="{{ route('category#updatePage', $item['category_id']) }}"><i
-                                                    class="fas fa-pen-to-square btn btn-sm btn-outline-primary"></i></a>
-                                            <a href="{{ route('category#delete', $item['category_id']) }}"
-                                                class="btn btn-sm  btn-outline-danger"><i class="fas fa-trash "></i></a> --}}
-
-                                    </tr>
-                                @endforeach
-
-                            {{-- @if (count() != 0)
-                                @foreach ( as )
-                                    <tr>
-                                        <td>{{ $item['category_id'] }}</td>
-                                        <td>{{ $item['title'] }}</td>
-                                        <td>{{ $item->created_at->format('j-F-Y') }}</td>
-                                        <td>{{ $item->updated_at->format('j-F-Y') }}</td>
-
-                                        <td>
-                                            <a href="{{ route('category#updatePage', $item['category_id']) }}"><i
-                                                    class="fas fa-pen-to-square btn btn-sm btn-outline-primary"></i></a>
-                                            <a href="{{ route('category#delete', $item['category_id']) }}"
-                                                class="btn btn-sm  btn-outline-danger"><i class="fas fa-trash "></i></a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            @else
-                                <tr>
-                                    <td colspan="4">
-                                        <h3 class="text-muted">There is no data...</h3>
-                                    </td>
-                                </tr>
-                            @endif --}}
-
-                        </tbody>
-                    </table>
-                    {{-- <span class="d-flex justify-end text-black">{{ $categories->links() }}</span> --}}
-                </div>
+                <!-- Pagination can be added here if needed -->
+                {{-- <div class="mt-3">
+                    {{ $payments->links() }}
+                </div> --}}
             </div>
         </div>
-
-
     </div>
 @endsection

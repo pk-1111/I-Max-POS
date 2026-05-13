@@ -40,6 +40,8 @@ use Illuminate\Support\Facades\Route;
 
      Route::get('airpods',[UserShopController::class,'airpodsShop'])->name('airpodsShop');
 
+    Route::get('accessories',[UserShopController::class,'accessoriesShop'])->name('accessoriesShop');
+
      // addToCart
 
     Route::get('cart',[CartController::class,'cartShow'])->name('cartShow');

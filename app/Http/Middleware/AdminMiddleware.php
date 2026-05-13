@@ -36,13 +36,10 @@ class AdminMiddleware
               return $next($request);
         }
 
-        return back();
+        return redirect()->route('userHome');
 
-       }else{
-
-        //  when user not login , can call login and register route
-                 return $next($request);
        }
-
     }
 }
+
+

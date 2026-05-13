@@ -2,12 +2,11 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="POS Admin Dashboard">
+    <meta name="author" content="iMax Studio">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <title>POS Admin Dashboard</title>
@@ -23,6 +22,30 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('admin/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
+    <style>
+        .sidebar {
+            background: #1a1a1a !important;
+        }
+
+        /* Deep dark background */
+        .sidebar-brand {
+            background: #000 !important;
+        }
+
+        .nav-item .nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .img-profile {
+            object-fit: cover;
+            border: 2px solid #e3e6f0;
+        }
+
+        .logo_main {
+            font-size: 1.5rem;
+            color: #fff;
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -31,176 +54,163 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav   sidebar sidebar-dark accordion" style="background-color: black" id="accordionSidebar">
+        <ul class="navbar-nav sidebar sidebar-dark accordion shadow-sm" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center py-4"
+                href="{{ route('admin#productList') }}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fa-brands logo_main fa-apple"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3"> iMax Studio</div>
+                <div class="sidebar-brand-text mx-3 uppercase font-weight-bold">iMax Studio</div>
             </a>
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link" href=""><i class="fas fa-fw fa-table"></i><span>Dashboard </span></a>
+            <li class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                <a class="nav-link" href="">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('categoryListPage') }}"><i
-                        class="fa-solid fa-circle-plus"></i></i><span>Category </span></a>
+            <div class="sidebar-heading mt-2">Management</div>
+
+            <li class="nav-item {{ request()->routeIs('categoryListPage') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('categoryListPage') }}">
+                    <i class="fa-solid fa-tags"></i>
+                    <span>Category</span>
+                </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('productCreatePage') }}"><i class="fa-solid fa-plus"></i></i><span>Add Products </span></a>
+            <li class="nav-item {{ request()->routeIs('productCreatePage') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('productCreatePage') }}">
+                    <i class="fa-solid fa-plus-circle"></i>
+                    <span>Add Products</span>
+                </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="{{route('admin#productList')}}"><i class="fa-solid fa-layer-group"></i><span>Product List </span></a>
+            <li class="nav-item {{ request()->routeIs('admin#productList') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin#productList') }}">
+                    <i class="fa-solid fa-boxes-stacked"></i>
+                    <span>Product List</span>
+                </a>
             </li>
 
-             @if(Auth::user()->role == 'superadmin')
-            <li class="nav-item">
-                <a class="nav-link" href="{{route('paymentMethodPage')}}"><i class="fa-solid fa-credit-card"></i></i><span>Payment Method
-                    </span></a>
+            <li class="nav-item {{ request()->routeIs('admin#orderList') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin#orderList') }}">
+                    <i class="fa-solid fa-receipt"></i>
+                    <span>Order Board</span>
+                </a>
             </li>
 
+            @if (Auth::user()->role == 'superadmin')
+                <div class="sidebar-heading mt-2">Admin Tools</div>
+                <li class="nav-item {{ request()->routeIs('paymentMethodPage') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('paymentMethodPage') }}">
+                        <i class="fa-solid fa-credit-card"></i>
+                        <span>Payment Methods</span>
+                    </a>
+                </li>
             @endif
 
+            <li class="nav-item {{ request()->routeIs('admin#customer_contact') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin#customer_contact') }}">
+                    <i class="fa-solid fa-envelope-open-text"></i>
+                    <span>Customer Contact</span>
+                </a>
+            </li>
+
+            <hr class="sidebar-divider">
+
             <li class="nav-item">
-                <a class="nav-link" href="{{route('admin#customer_contact')}}"><i class="fa-solid fa-list"></i><span>Customer Contact </span></a>
+                <a class="nav-link" href="{{ route('changePasswordPage') }}">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>Security</span>
+                </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{route('admin#orderList')}}"><i class="fa-solid fa-cart-shopping"></i><span>Order Board
-                    </span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="{{route('changePasswordPage')}}"><i class="fa-solid fa-lock"></i></i></i><span>Change Password
-                    </span></a>
-            </li>
-
-            <li class="nav-item">
-                <form action="{{ route('logout') }}" method="post">
+                <form action="{{ route('logout') }}" method="post" id="logoutForm">
                     @csrf
-                    <span class="nav-link">
-                        <button type="submit" class="btn bg-dark text-white"><i
-                                class="fa-solid fa-right-from-bracket"></i> Logout</button>
-                    </span>
+                    <a class="nav-link" href="javascript:void(0)"
+                        onclick="document.getElementById('logoutForm').submit();">
+                        <i class="fa-solid fa-power-off text-danger"></i>
+                        <span class="text-danger font-weight-bold">Logout</span>
+                    </a>
                 </form>
             </li>
         </ul>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content-wrapper" class="d-flex flex-column bg-light">
 
             <!-- Main Content -->
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-
-
-                    <!-- Topbar Navbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow-sm">
                     <ul class="navbar-nav ml-auto">
-
-
-                        <!-- Nav Item - User Information -->
+                        <!-- User Info -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->name}}</span>
-                                <img class="img-profile rounded-circle"
-                                    src="{{ asset(Auth::user()->profile != null ? 'profile/'. Auth::user()->profile : 'admin/img/undraw_profile.svg') }}">
+                                <span
+                                    class="mr-3 d-none d-lg-inline text-gray-700 font-weight-bold small">{{ Auth::user()->name }}</span>
+                                <img class="img-profile rounded-circle shadow-sm"
+                                    src="{{ asset(Auth::user()->profile != null ? 'profile/' . Auth::user()->profile : 'admin/img/undraw_profile.svg') }}">
                             </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="{{route('adminProfile')}}">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in border-0">
+                                <a class="dropdown-item" href="{{ route('adminProfile') }}">
+                                    <i class="fas fa-user-circle fa-sm fa-fw mr-2 text-gray-400"></i> My Profile
                                 </a>
+                                @if (Auth::user()->role == 'superadmin')
+                                    <a class="dropdown-item" href="{{ route('addNewAdminPage') }}">
+                                        <i class="fas fa-user-plus fa-sm fa-fw mr-2 text-gray-400"></i> Create Admin
+                                    </a>
 
-                                @if(Auth::user()->role == 'superadmin')
+                                    <a class="dropdown-item" href="{{ route('adminListPage') }}">
+                                        <i class="fas fa-users-cog fa-sm fa-fw mr-2 text-gray-400"></i> Admin Management
+                                    </a>
 
-                                <a class="dropdown-item" href="{{route('addNewAdminPage')}}">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Add New Admin Account
-                                </a>
-
+                                    <a class="dropdown-item" href="{{ route('userListPage') }}">
+                                        <i class="fas fa-users-cog fa-sm fa-fw mr-2 text-gray-400"></i> User List
+                                    </a>
                                 @endif
 
-                                 <a class="dropdown-item" href="{{route('adminListPage')}}">
-                                    <i class="fas fa-users fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Admin List
-                                </a>
-
-
-                                <a class="dropdown-item" href="">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    User List
-                                </a>
-
-
-                                <a class="dropdown-item" href="{{route('changePasswordPage')}}">
-                                    <i class="fa-solid fa-lock fa-sm fa-fw mr-2 text-gray-400"></i></i></i>
-                                    Change Password
-                                </a>
                                 <div class="dropdown-divider"></div>
-                                <span class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
-                                    <form action="{{ route('logout') }}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="btn btn-dark text-white w-100"
-                                            value="Logout">Logout</button>
-                                    </form>
-                                </span>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item text-danger">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i> Logout
+                                    </button>
+                                </form>
                             </div>
                         </li>
-
                     </ul>
-
                 </nav>
-                <!-- End of Topbar -->
 
-                @yield('content')
+                <!-- Page Content -->
+                <div class="pb-5">
+                    @yield('content')
+                </div>
 
-                @include('sweetalert::alert')
+            </div>
 
+            @include('sweetalert::alert')
 
-                <!-- Bootstrap core JavaScript-->
-                <script src="{{ asset('admin/vendor/jquery/jquery.min.js') }}"></script>
-
-                <script src="{{ asset('admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
-                <!-- Core plugin JavaScript-->
-                <script src="{{ asset('admin/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
-
-                <!-- Custom scripts for all pages-->
-                <script src="{{ asset('admin/js/sb-admin-2.min.js') }}"></script>
-
-
-                <script src="{{ asset('admin/vendor/chart.js/Chart.min.js') }}"></script>
-
-                <!-- Page level custom scripts -->
-                <script src="{{ asset('admin/js/demo/chart-area-demo.js') }}"></script>
-                <script src="{{ asset('admin/js/demo/chart-pie-demo.js') }}"></script>
-
-                {{-- imageUpload js --}}
-
-                <script src="{{asset('admin/js/imageUpload.js')}}"></script>
-
-                {{-- orderStatus --}}
-
-                 <script src="{{asset('admin/js/orderStatus.js')}}"></script>
-
-
-
+            <!-- Scripts -->
+            <script src="{{ asset('admin/vendor/jquery/jquery.min.js') }}"></script>
+            <script src="{{ asset('admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+            <script src="{{ asset('admin/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+            <script src="{{ asset('admin/js/sb-admin-2.min.js') }}"></script>
+            <script src="{{ asset('admin/js/imageUpload.js') }}"></script>
+            <script src="{{ asset('admin/js/orderStatus.js') }}"></script>
+        </div>
+    </div>
 </body>
 
 </html>

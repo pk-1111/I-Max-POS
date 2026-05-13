@@ -166,7 +166,7 @@ class UserShopController extends Controller
          $products = Product::select('categories.title as category_name','products.id','products.name','products.image','products.price','products.category_id','products.stock','discounts.rate as rate')
         ->leftJoin('categories','products.category_id','categories.category_id')
         ->leftJoin('discounts','products.id','discounts.product_id')
-        ->where('categories.title','airpod')
+        ->where('categories.title','airpods')
         ->orderBy('products.created_at','desc')->get();
 
         // dd($products->toArray());
@@ -174,6 +174,31 @@ class UserShopController extends Controller
   }
   return "Category Not found";
   }
+
+
+
+
+
+
+  // ipad shop direct page
+  public function accessoriesShop(Request $request){
+        $category = Category::get();
+
+    //    dd($category->toArray());
+
+      if($category){
+         $products = Product::select('categories.title as category_name','products.id','products.name','products.image','products.price','products.category_id','products.stock','discounts.rate as rate')
+        ->leftJoin('categories','products.category_id','categories.category_id')
+        ->leftJoin('discounts','products.id','discounts.product_id')
+        ->where('categories.title','accessories')
+        ->orderBy('products.created_at','desc')->get();
+
+        // dd($products->toArray());
+    return view('user.shop.airpods.airpodsShop',compact('products'));
+  }
+  return "Category Not found";
+  }
+
 
 
    // action log process
