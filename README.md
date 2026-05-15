@@ -2,7 +2,7 @@
 i-Device Shop is a specialized E-commerce and POS platform dedicated to premium products. The system bridges the gap between a consumer-facing storefront and a functional retail management tool, providing a seamless experience for both customers and administrators.
 
 🌐 Project Overview & Demo
-You can explore the full UI/UX design case study and detailed project breakdown on my portfolio.
+https://kks-portfolio.vercel.app/
 
 🔗 View Full Case Study on My Portfolio ---
 
@@ -57,4 +57,5 @@ Kyaw Kaung San
 
 Full-Stack Developer
 
-LinkedIn | Portfolio
+ LinkedIn: www.linkedin.com/in/kyaw-kaung-san 
+ Portfolio: https://kks-portfolio.vercel.app
