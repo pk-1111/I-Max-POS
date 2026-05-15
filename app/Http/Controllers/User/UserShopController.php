@@ -55,14 +55,9 @@ class UserShopController extends Controller
   public function iphoneShop(Request $request){
 
 
-
-
-
        $category = Category::get();
 
     //    dd($category->toArray());
-
-
 
 
       if($category){
@@ -73,9 +68,6 @@ class UserShopController extends Controller
         ->orderBy('products.created_at','desc')->get();
 
         // dd($products->toArray());
-
-
-
 
 
     return view('user.shop.iphone.iphoneShop',compact('products'));
@@ -89,8 +81,6 @@ class UserShopController extends Controller
       $category = Category::get();
 
     //    dd($category->toArray());
-
-
 
 
       if($category){

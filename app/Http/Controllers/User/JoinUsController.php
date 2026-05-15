@@ -14,6 +14,8 @@ class JoinUsController extends Controller
     return view('user.joinUs.join_us');
   }
 
+  // contact create 
+
   public function contactCreate(Request $request) {
 
 

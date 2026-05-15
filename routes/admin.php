@@ -91,7 +91,8 @@ use Illuminate\Support\Facades\Route;
 
          });
 
-          //  payment methods
+
+    //  payment methods
 
     Route::group(['prefix' => 'paymentMethod'],function(){
        Route::get('payment',[PaymentController::class,'paymentMethodPage'])->name('paymentMethodPage');

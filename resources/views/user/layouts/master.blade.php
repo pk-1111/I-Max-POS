@@ -11,10 +11,6 @@
 
 
 
-
-
-
-
 {{-- nav css --}}
 
 <link rel="stylesheet" href="{{ asset('user/css/nav.css') }}">

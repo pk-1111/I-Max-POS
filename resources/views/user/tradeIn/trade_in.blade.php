@@ -73,7 +73,7 @@
     <section class="max-w-4xl mx-auto py-16 px-6">
         <h3 class="text-xl font-bold mb-6">Terms & Conditions</h3>
         <ul class="space-y-4 text-gray-500 text-sm list-disc pl-5 leading-relaxed">
-            <li>အဟောင်းပေး အသစ်ယူ အစီအစဉ်သည် mDrive ဆိုင်ခွဲများတွင်သာ အကျုံးဝင်ပါသည်။</li>
+            <li>အဟောင်းပေး အသစ်ယူ အစီအစဉ်သည် I-Max ဆိုင်ခွဲများတွင်သာ အကျုံးဝင်ပါသည်။</li>
             <li>စက်ပစ္စည်း၏ အခြေအနေပေါ်မူတည်၍ ဈေးနှုန်း အပြောင်းအလဲ ရှိနိုင်ပါသည်။</li>
             <li>စက်တွင် ပါဝင်သော iCloud Account များအားလုံးအား Sign out လုပ်ထားရပါမည်။</li>
             <li>Trade-in ပြုလုပ်ပြီးပါက ငွေသားပြန်အမ်းပေးခြင်း မရှိဘဲ အသစ်ဝယ်ယူမှုတွင်သာ ခုနှိမ်ပေးမည်ဖြစ်ပါသည်။</li>

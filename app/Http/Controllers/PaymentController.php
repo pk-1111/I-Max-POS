@@ -38,7 +38,6 @@ class PaymentController extends Controller
 
 
 
-
     // payment validation
 
       private function checkAdminPaymentValidation($request) {

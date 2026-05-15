@@ -42,6 +42,8 @@ class UserPaymentController extends Controller
 
     }
 
+    // paymentPage
+
     public function paymentPage(){
           $payments = Payment::orderBy('type','asc')->get();
 

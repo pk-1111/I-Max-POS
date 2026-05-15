@@ -2,68 +2,6 @@
 
 
 @section('content')
-    {{-- <section class="bg-gray-50 py-16 px-8 md:px-20 min-h-500px flex items-center">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-
-            <div class="space-y-6  w-2xl">
-                <h3 class="text-2xl md:text-4xl font-semibold text-gray-800 leading-tight">
-                    What is mCare Ultra Protection Plan?
-                </h3>
-                <p class="text-gray-600 text-lg leading-relaxed">
-                    mCare Ultra Protection Plan (MUPP) provides coverage for accidental damage
-                    and liquid damage incidents for one year from the date of purchase or
-                    activation (whichever is earlier), as these are not included in the standard 1-year
-                    Apple Warranty. Additionally, battery issues are covered for up to two years.
-                </p>
-
-            </div>
-
-            <div class="flex justify-center md:justify-end">
-                <img src="{{ asset('user/image/16promax.jpg') }}" alt="iPhone mCare Protection"
-                    class="w-full max-w-md object-contain">
-            </div>
-
-        </div>
-    </section>
-
-    <div class="container mx-auto p-4">
-        <h1 class="text-2xl font-bold text-blue-500 mb-6 text-center">Only for </h1>
-        <h1 class="text-5xl font-bold text-black mb-6 text-center">iPhone</h1>
-        <!-- Image Grid Container -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 bg-gray-50 gap-4">
-            <!-- Image Card 1 -->
-            <div class="overflow-hidden rounded-lg  shadow-lg">
-                <img src="https://picsum.photos" alt="Nature image 1"
-                    class="w-full h-48 object-cover transition duration-500 ease-in-out transform hover:scale-105">
-            </div>
-            <!-- Image Card 2 -->
-            <div class="overflow-hidden rounded-lg shadow-lg">
-                <img src="https://picsum.photos" alt="Nature image 2"
-                    class="w-full h-48 object-cover transition duration-500 ease-in-out transform hover:scale-105">
-            </div>
-            <!-- Image Card 3 -->
-            <div class="overflow-hidden rounded-lg shadow-lg">
-                <img src="https://picsum.photos" alt="Nature image 3"
-                    class="w-full h-48 object-cover transition duration-500 ease-in-out transform hover:scale-105">
-            </div>
-            <!-- Image Card 4 -->
-            <div class="overflow-hidden rounded-lg shadow-lg">
-                <img src="https://picsum.photos" alt="Nature image 4"
-                    class="w-full h-48 object-cover transition duration-500 ease-in-out transform hover:scale-105">
-            </div>
-            <!-- Image Card 5 -->
-            <div class="overflow-hidden rounded-lg shadow-lg">
-                <img src="https://picsum.photos" alt="Nature image 5"
-                    class="w-full h-48 object-cover transition duration-500 ease-in-out transform hover:scale-105">
-            </div>
-            <!-- Image Card 6 -->
-            <div class="overflow-hidden rounded-lg shadow-lg">
-                <img src="https://picsum.photos" alt="Nature image 6"
-                    class="w-full h-48 object-cover transition duration-500 ease-in-out transform hover:scale-105">
-            </div>
-        </div>
-    </div> --}}
-
     <header class="bg-black text-white p-4">
         <div class="container mx-auto flex justify-between items-center text-sm">
             <div class="flex items-center space-x-6">

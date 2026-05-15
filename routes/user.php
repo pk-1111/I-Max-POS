@@ -66,10 +66,6 @@ use Illuminate\Support\Facades\Route;
       Route::post('order',[UserOrderController::class,'orderList'])->name('orderList');
 
 
-
-
-
-
      // learn more
      Route::get('learnMore',[LearnMoreController::class,'learnMorePage'])->name('learnMorePage');
      Route::get('iphone17Pro',[LearnMoreController::class,'iphone17Pro'])->name('iphone17Pro');
@@ -95,11 +91,6 @@ use Illuminate\Support\Facades\Route;
     // trade in
 
      Route::get('tradeIn',[TradeInController::class,'tradeInPage'])->name('tradeInPage');
-
-
-
-
-
 
 
   });

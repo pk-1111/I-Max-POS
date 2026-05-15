@@ -1,22 +1,21 @@
-/* ၁။ Parent ကို position relative ပေးမှ သူ့အောက်ကပ်ရပ်မှာ ပေါ်မှာပါ */
 .menu_item.dropdown {
     position: relative;
 }
 
-/* ၂။ Dropdown box ကို အပေါ်ကနေ ထပ်ပေါ်အောင် လုပ်တာ */
+
 .dropdown_content {
     display: none;
-    position: absolute; /* ဒါက တခြား menu တွေကို တွန်းမထုတ်အောင် တားပေးတာ */
+    position: absolute;
     background-color: #fff;
     min-width: 160px;
-    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     border-radius: 20px;
     z-index: 999;
-    top: 100%; /* Menu ရဲ့ အောက်ဘက်ကပ်ရပ်မှာ ပေါ်ဖို */
+    top: 100%;
     left: 0;
 }
 
-/* ၃။ စာသားတွေကို တစ်ကြောင်းချင်း ဆင်းခိုင်းတာ */
+
 .dropdown_content a {
     display: block !important;
     color: black;
@@ -25,7 +24,7 @@
     text-align: left;
 }
 
-/* ၄။ Mouse တင်ရင် ပေါ်လာအောင် လုပ်တာ */
+
 .menu_item.dropdown:hover .dropdown_content {
     display: block;
 }
